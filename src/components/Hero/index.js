@@ -2,36 +2,40 @@ import React, { PureComponent } from 'react'
 import I from 'seamless-immutable'
 import cx from 'classnames'
 import './styles.css'
-import hero from '../../images/hero.png'
+import hero from '../../images/cars/hero.png'
+import retro from '../../images/cars/retro.png'
+import red from '../../images/cars/red.png'
+import range from '../../images/cars/range.png'
+import mercedes from '../../images/cars/mercedes.png'
 
 export default class Hero extends PureComponent {
   state = {
     position: I.from({
       left: 10,
-      top: 300,
-    }),
+      top: 300
+    })
   }
 
-  move =  {
+  move = {
     left: null,
     right: null,
     up: null,
-    down: null,
+    down: null
   }
 
-  componentDidMount() {
+  componentDidMount () {
     document.addEventListener('keydown', this.handleKeyDown)
     document.addEventListener('keyup', this.handleKeyUp)
   }
 
-  componentWillUnmount() {
-    document.removeEventListener('keydown');
-    document.removeEventListener('keyup');
+  componentWillUnmount () {
+    document.removeEventListener('keydown')
+    document.removeEventListener('keyup')
   }
 
   handleKeyDown = ({ keyCode }) => {
-    const { isGameOver, hasCrash } = this.props;
-    if(!isGameOver && !hasCrash) {
+    const { isGameOver, hasCrash } = this.props
+    if (!isGameOver && !hasCrash) {
       if (keyCode === 37 && !this.move.left) return this.move.left = requestAnimationFrame(this.left)
       if (keyCode === 39 && !this.move.right) return this.move.right = requestAnimationFrame(this.right)
       if (keyCode === 38 && !this.move.up) return this.move.up = requestAnimationFrame(this.up)
@@ -40,8 +44,8 @@ export default class Hero extends PureComponent {
   }
 
   handleKeyUp = ({ keyCode }) => {
-    const { isGameOver, changeMultiScore } = this.props;
-    if(!isGameOver) {
+    const { isGameOver, changeMultiScore } = this.props
+    if (!isGameOver) {
       switch (keyCode) {
         case 37:
           cancelAnimationFrame(this.move.left)
@@ -67,7 +71,7 @@ export default class Hero extends PureComponent {
   }
 
   left = () => {
-    const { position } = this.state;
+    const { position } = this.state
     const { isGameOver, hasCrash } = this.props
     if (!isGameOver && !hasCrash && position.left > 0) {
       this.setState({ position: position.set('left', position.left - 5) })
@@ -76,8 +80,8 @@ export default class Hero extends PureComponent {
   }
 
   right = () => {
-    const { position } = this.state;
-    const { isGameOver,hasCrash, container } = this.props
+    const { position } = this.state
+    const { isGameOver, hasCrash, container } = this.props
     if (!isGameOver && !hasCrash && position.left < container.offsetWidth - 40) {
       this.setState({ position: position.set('left', position.left + 5) })
       this.move.right = requestAnimationFrame(this.right)
@@ -85,7 +89,7 @@ export default class Hero extends PureComponent {
   }
 
   up = () => {
-    const { position } = this.state;
+    const { position } = this.state
     const { isGameOver, hasCrash, hasPot, changeMultiScore } = this.props
     if (!isGameOver && !hasCrash && !hasPot && position.top > 0) {
       this.setState({ position: position.set('top', position.top - 3) })
@@ -95,7 +99,7 @@ export default class Hero extends PureComponent {
   }
 
   down = () => {
-    const { position } = this.state;
+    const { position } = this.state
     const { isGameOver, hasCrash, container } = this.props
     if (!isGameOver && !hasCrash && position.top < container.offsetHeight - 70) {
       this.setState({ position: position.set('top', position.top + 3) })
@@ -103,10 +107,28 @@ export default class Hero extends PureComponent {
     }
   }
 
+  getImage = () => {
+    const { lap } = this.props
+    switch (lap) {
+      case 1: return hero
+      case 2: return range
+      case 3: return mercedes
+      case 4: return red
+      case 5: return retro
+      default: return hero
+    }
+  }
+
   render () {
-    const { setRef, hasCrash } = this.props;
+    const { setRef, hasCrash } = this.props
     return (
-      <img src={hero} ref={setRef} style={this.state.position} className={cx('car', { crashed: hasCrash })} alt="hero" />
+      <img
+        src={this.getImage()}
+        ref={setRef}
+        style={this.state.position}
+        className={cx('car', { crashed: hasCrash })}
+        alt='hero'
+      />
     )
   }
 }

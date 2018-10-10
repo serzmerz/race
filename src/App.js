@@ -99,7 +99,7 @@ class App extends Component {
       }))
     }
 
-    if (this.state.lap === 2) {
+    if (this.state.lap === 6) {
       this.cancelGame()
       return
     }
@@ -176,6 +176,7 @@ class App extends Component {
                 changeMultiScore={this.changeMultiScore}
                 hasCrash={hasCrash}
                 hasPot={hasPot}
+                lap={lap}
               />
               {[{ top: -100, left: '30%' },
                 { top: -200, left: '50%' },

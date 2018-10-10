@@ -1,0 +1,13 @@
+.crashed {
+    transform: rotate(-30deg);
+    animation: go-invisible .25s infinite alternate;
+}
+
+@keyframes go-invisible {
+    from {
+        opacity: .3;
+    }
+    to {
+        opacity: 1;
+    }
+}

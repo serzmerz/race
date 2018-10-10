@@ -1,9 +1,8 @@
 .road {
     position: relative;
-    height: 90vh;
-    width: 25%;
-    left: 35%;
-    margin-top: 20px;
+    height: 85vh;
+    width: 100%;
+    max-width: 350px;
     background-color: #292929;
     overflow: hidden;
 }
@@ -14,4 +13,8 @@
     width: 4%;
     margin-left: 48%;
     background-color: rgba(255,255,255,0.5);
+}
+
+.help {
+    text-align: center;
 }

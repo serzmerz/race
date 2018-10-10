@@ -1,5 +1,7 @@
 import React, { PureComponent } from 'react'
 import I from 'seamless-immutable'
+import cx from 'classnames'
+import './styles.css'
 import hero from '../../images/hero.png'
 
 export default class Hero extends PureComponent {
@@ -28,8 +30,8 @@ export default class Hero extends PureComponent {
   }
 
   handleKeyDown = ({ keyCode }) => {
-    const { isGameOver } = this.props;
-    if(!isGameOver) {
+    const { isGameOver, hasCrash } = this.props;
+    if(!isGameOver && !hasCrash) {
       if (keyCode === 37 && !this.move.left) return this.move.left = requestAnimationFrame(this.left)
       if (keyCode === 39 && !this.move.right) return this.move.right = requestAnimationFrame(this.right)
       if (keyCode === 38 && !this.move.up) return this.move.up = requestAnimationFrame(this.up)
@@ -66,8 +68,8 @@ export default class Hero extends PureComponent {
 
   left = () => {
     const { position } = this.state;
-    const { isGameOver } = this.props
-    if (!isGameOver && position.left > 0) {
+    const { isGameOver, hasCrash } = this.props
+    if (!isGameOver && !hasCrash && position.left > 0) {
       this.setState({ position: position.set('left', position.left - 5) })
       this.move.left = requestAnimationFrame(this.left)
     }
@@ -75,8 +77,8 @@ export default class Hero extends PureComponent {
 
   right = () => {
     const { position } = this.state;
-    const { isGameOver, container } = this.props
-    if (!isGameOver && position.left < container.offsetWidth - 40) {
+    const { isGameOver,hasCrash, container } = this.props
+    if (!isGameOver && !hasCrash && position.left < container.offsetWidth - 40) {
       this.setState({ position: position.set('left', position.left + 5) })
       this.move.right = requestAnimationFrame(this.right)
     }
@@ -84,8 +86,8 @@ export default class Hero extends PureComponent {
 
   up = () => {
     const { position } = this.state;
-    const { isGameOver, changeMultiScore } = this.props
-    if (!isGameOver && position.top > 0) {
+    const { isGameOver, hasCrash, hasPot, changeMultiScore } = this.props
+    if (!isGameOver && !hasCrash && !hasPot && position.top > 0) {
       this.setState({ position: position.set('top', position.top - 3) })
       this.move.up = requestAnimationFrame(this.up)
       changeMultiScore(true)
@@ -94,17 +96,17 @@ export default class Hero extends PureComponent {
 
   down = () => {
     const { position } = this.state;
-    const { isGameOver, container } = this.props
-    if (!isGameOver && position.top < container.offsetHeight - 70) {
+    const { isGameOver, hasCrash, container } = this.props
+    if (!isGameOver && !hasCrash && position.top < container.offsetHeight - 70) {
       this.setState({ position: position.set('top', position.top + 3) })
       this.move.down = requestAnimationFrame(this.down)
     }
   }
 
   render () {
-    const { setRef } = this.props;
+    const { setRef, hasCrash } = this.props;
     return (
-      <img src={hero} ref={setRef} style={this.state.position} className='car' alt="hero" />
+      <img src={hero} ref={setRef} style={this.state.position} className={cx('car', { crashed: hasCrash })} alt="hero" />
     )
   }
 }

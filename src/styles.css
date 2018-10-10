@@ -5,7 +5,7 @@
     z-index: 1;
 }
 
-#restart_div {
+.wrap-restart {
     position: absolute;
     height: 100%;
     width: 100%;
@@ -15,9 +15,14 @@
     font-size: 40px;
     text-align: center;
     display: none;
+    z-index: 10;
 }
 
-#restart {
+.wrap-restart.visible {
+    display: block;
+}
+
+.restart {
     border: none;
     padding: 25px;
     color: white;
@@ -25,37 +30,35 @@
     font-size: 30px;
     margin-top: 30%;
 }
-.small_text{
-    font-size: 15px;
-}
-#score_div{
-    position: absolute;
-    margin-top: 20%;
-    margin-left: 10%;
-    font-size: 35px;
-    background-color: white;
-    color: #454545;
-    padding: 10px;
-    box-shadow: 4px 4px 0 1px #808080;
-}
-
-#lap_div{
-    position: absolute;
-    margin-top: 30%;
-    margin-left: 10%;
-    font-size: 35px;
-    background-color: white;
-    color: #454545;
-    padding: 10px;
-    box-shadow: 4px 4px 0 1px #808080;
-}
-
-#help{
-    text-align: center;
-}
 
 .pot {
     width: 25px;
     height: 25px;
     position: absolute;
+}
+
+.main {
+    display: flex;
+    justify-content: space-between;
+}
+
+.wrap-road {
+    display: flex;
+}
+
+.action-game {
+    margin-top: 50px;
+    margin-left: 2px;
+    border: none;
+    color: white;
+    width: 60px;
+    height: 60px;
+    font-family: sans-serif;
+    background-color: #8a64ff;
+    cursor: pointer;
+    visibility: hidden;
+}
+
+.action-game.visible {
+    visibility: visible;
 }

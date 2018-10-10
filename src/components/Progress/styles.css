@@ -1,10 +1,11 @@
 .progress-root {
     height: 300px;
+    margin-top: 20px;
     margin-left: 10px;
     width: 30px;
-    position: absolute;
     background-color: #292929;
     display: flex;
+    position: relative;
     flex-direction: column;
     justify-content: space-between;
 }

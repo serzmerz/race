@@ -3,11 +3,11 @@ import './styles.css'
 
 export default class Score extends PureComponent {
   render () {
-    const { lap, displayScore, tableScore } = this.props;
+    const { isGameActive, lap, displayScore, tableScore } = this.props
     return (
       <div className='wrap-score'>
         <p className='score'>Score: {displayScore}</p>
-        <p className='lap'>Lap: {lap}</p>
+        <p className='lap'>{isGameActive ? `Lap: ${lap}` : 'Start the game'}</p>
         <table>
           <tbody>
             {tableScore.map((score, idx) => (

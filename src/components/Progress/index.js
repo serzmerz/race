@@ -4,6 +4,9 @@ import hero from '../../images/cars/hero.png'
 import start from '../../images/start.png'
 import finish from '../../images/finish.png'
 
+/**
+ * Component display road map on left side
+ */
 export default class Progress extends PureComponent {
   render () {
     const { score } = this.props

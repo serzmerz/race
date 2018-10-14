@@ -1,6 +1,9 @@
 import React, { PureComponent } from 'react'
 import './styles.css'
 
+/**
+ * Component for displaying score, table score for each lap
+ */
 export default class Score extends PureComponent {
   render () {
     const { isGameActive, lap, displayScore, tableScore } = this.props

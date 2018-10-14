@@ -8,14 +8,22 @@ import red from '../../images/cars/red.png'
 import range from '../../images/cars/range.png'
 import mercedes from '../../images/cars/mercedes.png'
 
+/**
+ * Component Hero, render, manage hero
+ */
 export default class Hero extends PureComponent {
   state = {
+    // initial position
     position: I.from({
       left: 10,
       top: 300
     })
   }
 
+  /**
+   * current ways
+   * @type {{left: null, right: null, up: null, down: null}}
+   */
   move = {
     left: null,
     right: null,
@@ -24,15 +32,22 @@ export default class Hero extends PureComponent {
   }
 
   componentDidMount () {
+    // add listeners on keyboard
     document.addEventListener('keydown', this.handleKeyDown)
     document.addEventListener('keyup', this.handleKeyUp)
   }
 
   componentWillUnmount () {
+    // remove listeners on keyboard
     document.removeEventListener('keydown')
     document.removeEventListener('keyup')
   }
 
+  /**
+   * handle key down event
+   * @param keyCode
+   * @returns {number}
+   */
   handleKeyDown = ({ keyCode }) => {
     const { isGameOver, hasCrash } = this.props
     if (!isGameOver && !hasCrash) {
@@ -43,6 +58,11 @@ export default class Hero extends PureComponent {
     }
   }
 
+  /**
+   * handle key up event
+   * @param keyCode
+   * @returns {null}
+   */
   handleKeyUp = ({ keyCode }) => {
     const { isGameOver, changeMultiScore } = this.props
     if (!isGameOver) {
@@ -70,6 +90,9 @@ export default class Hero extends PureComponent {
     }
   }
 
+  /**
+   * move hero left
+   */
   left = () => {
     const { position } = this.state
     const { isGameOver, hasCrash } = this.props
@@ -79,6 +102,9 @@ export default class Hero extends PureComponent {
     }
   }
 
+  /**
+   * move hero right
+   */
   right = () => {
     const { position } = this.state
     const { isGameOver, hasCrash, container } = this.props
@@ -88,6 +114,9 @@ export default class Hero extends PureComponent {
     }
   }
 
+  /**
+   * move hero up
+   */
   up = () => {
     const { position } = this.state
     const { isGameOver, hasCrash, hasPot, changeMultiScore } = this.props
@@ -98,6 +127,9 @@ export default class Hero extends PureComponent {
     }
   }
 
+  /**
+   * move hero down
+   */
   down = () => {
     const { position } = this.state
     const { isGameOver, hasCrash, container } = this.props
@@ -107,6 +139,9 @@ export default class Hero extends PureComponent {
     }
   }
 
+  /**
+   * get hero image, depends on lap
+   */
   getImage = () => {
     const { lap } = this.props
     switch (lap) {
